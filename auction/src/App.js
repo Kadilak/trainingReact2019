@@ -4,6 +4,7 @@ import MenuBar from './MenuBar';
 import AuctionSite from './auction/AuctionSite';
 import PromotionSite from './auction/PromotionSite';
 import { Switch, Route, Redirect } from 'react-router-dom'
+import CartSite from './auction/CartSite';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Redirect path="/" to="/auctions" exact/>
           <Route path="/auctions" component={AuctionSite}/>
           <Route path="/promotions" component={PromotionSite}/>
+          <Route path="/cart" component={CartSite}/>
         </Switch>
       </div>
     </div>

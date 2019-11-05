@@ -14,6 +14,9 @@ const menuItems = [
     {
         href: '/advices', title: 'Podpowiadamy'
     },
+    {
+        href: '/cart', title: 'Koszyk'
+    },
 ];
 
 AuctionItem.propTypes = {
