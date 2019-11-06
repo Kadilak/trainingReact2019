@@ -1,4 +1,4 @@
-import {applyMiddleware, createStore, combineReducers } from 'redux'
+import {applyMiddleware, createStore, combineReducers, compose } from 'redux'
 import { cardReducer } from './cardReducer';
 import userReducer from './userReducer';
 import thunk from 'redux-thunk';
@@ -8,6 +8,16 @@ const reducers = {
     user: userReducer
 }
 
-const store = createStore(combineReducers(reducers), applyMiddleware(thunk))
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+if(process.env.NODE_ENV === 'production'){
+    composeEnhancers = compose;
+}
+
+const store = createStore(
+    combineReducers(reducers),
+    composeEnhancers(applyMiddleware(thunk))
+    
+)
 
 export default store

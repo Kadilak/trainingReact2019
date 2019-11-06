@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import { NavLink } from 'react-router-dom' 
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser, faShoppingBasket } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faShoppingBasket, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 
 const menuItems = [
@@ -56,6 +56,9 @@ class MenuBar extends Component {
                 </NavLink>
                 <NavLink className="btn btn-info" to='/cart'>
                     <FontAwesomeIcon icon={faShoppingBasket} /> Koszyk
+                </NavLink>
+                <NavLink className="btn btn-success" to='/add-auction'>
+                    <FontAwesomeIcon icon={faPlus} /> Dodaj aukcje
                 </NavLink>
                 </div>
             </nav>

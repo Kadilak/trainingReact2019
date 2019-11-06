@@ -11,9 +11,9 @@ const initialUserState = {
 function userReducer(user = initialUserState, action) {
     switch (action.type) {
         case LOG_IN_USER:
-            return [...user,...{isAuth: true}]
+            return {...user, isAuth: true}
         case LOG_OUT_USER:
-            return [...initialUserState,...{isAuth: false}]
+            return {...user, isAuth: false}
         default:
             return user;
     }

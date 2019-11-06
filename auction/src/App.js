@@ -6,6 +6,8 @@ import PromotionSite from './auction/PromotionSite';
 import { Switch, Route, Redirect } from 'react-router-dom'
 import CartSite from './auction/CartSite';
 import LogInSite from './auth/LogInSite';
+import AddAuctionSite from './auction/AddAuctionSite';
+import { WithAuth } from './auth/withAuth'
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
           <Route path="/promotions" component={PromotionSite}/>
           <Route path="/cart" component={CartSite}/>
           <Route path="/log-in" component={LogInSite}/>
+          <Route path="/add-auction" component={WithAuth(AddAuctionSite)}/>
         </Switch>
       </div>
     </div>
