@@ -1,64 +1,27 @@
 import React, { Component } from 'react'
 import AuctionItem from './AuctionItem'
-import { getAllAuctions } from '../services/auctionService'
-
-// const auctions = [
-//     {
-//         id: 1,
-//         title:"hellooo",
-//         imgURL: "https://picsum.photos/id/123/200/200",
-//         price: 200,
-//         description: "description"
-//     },
-//     {
-//         id: 2,
-//         title:"hellooo",
-//         imgURL: "https://picsum.photos/id/321/200/200",
-//         price: 33,
-//         description: "description"
-//     },
-//     {
-//         id: 3,
-//         title:"hellooo",
-//         imgURL: "https://picsum.photos/id/111/200/200",
-//         price: 22,
-//         description: "description"
-//     },
-//     {
-//         id: 4,
-//         title:"hellooo",
-//         imgURL: "https://picsum.photos/id/222/200/200",
-//         price: 11,
-//         description: "description"
-//     },
-//     {
-//         id: 5,
-//         title:"hellooo",
-//         imgURL: "https://picsum.photos/id/52/200/200",
-//         price: 11,
-//         //description: "description"
-//     },
-//     {
-//         id: 6,
-//         title:"hellooo",
-//         imgURL: "https://picsum.photos/id/32/200/200",
-//         price: 11,
-//         description: "description"
-//     },
-//     {
-//         id: 7,
-//         title:"hellooo",
-//         imgURL: "https://picsum.photos/id/221/200/200",
-//         price: 11,
-//         //description: "description"
-//     },
-// ]
-
+import auctionService from '../services/auctionService'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import { addItemToCart } from '../store/cardActions'
+import CartItemsCounter from './CartItemsCounter'
 
 class AuctionSite extends Component {
 
+    static propTypes = {
+        addItemToCart: PropTypes.func.isRequired
+    }
+
+    state = {
+        isLoading: true,
+        auctions: [],
+        error: '',
+        count: 0
+    }
+
     componentDidMount() {
-        getAllAuctions()
+        auctionService
+        .getAllAuctions()
         .then((res) => {
             this.setState({auctions: res.data, isLoading: false})
         })
@@ -67,29 +30,39 @@ class AuctionSite extends Component {
         })
     }
 
-    state = {
-        isLoading: true,
-        auctions: [],
-        error: ''
-    }
+    handleAddAuctionToCart = (auction) => {
+        this.props.addItemToCart(auction);
+    };
 
     render() {
         const {auctions} = this.state;
         return (
             <div>
                 <h2>Lista aukcji</h2>
+                <CartItemsCounter />
                 <div className="row">
                     {auctions.map((auction) => (
                         <div key={auction.id} className="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <AuctionItem  {...auction}/>
+                        <AuctionItem  {...auction} addToCart={(auction) => this.handleAddAuctionToCart(auction)} />
                         </div>
                     )
                     )}
                 </div>
             </div>
-            
         )
     }
 }
 
-export default AuctionSite
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addItemToCart: (auction) => dispatch(addItemToCart(auction))
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        count: state.cart.length
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(AuctionSite)

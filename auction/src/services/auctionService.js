@@ -2,10 +2,13 @@ import { axInstance } from './ax-instance'
 
 const baseURI = '/auctions'
 
-export function getAllAuctions()
-{
-    return axInstance.get(baseURI);
+const auctionService = {
+    getAllAuctions() {
+        return axInstance.get(baseURI);
+    }
 }
+
+export default auctionService;
 
 // function getAllAuctions()
 // {

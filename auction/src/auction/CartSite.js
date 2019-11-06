@@ -10,9 +10,15 @@ function CartSite ({auctions}) {
             </div>
         )
 }
+
 const mapStateStateToProps = (state) => {
     return {
         auctions: state.cart,
     }
-}
-export default connect(mapStateStateToProps)(CartSite);
+};
+
+
+const mapActionsToProps = (dispatch) => {
+};
+
+export default connect(mapStateStateToProps,mapActionsToProps)(CartSite);

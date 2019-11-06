@@ -1,7 +1,8 @@
 import React,{Component} from 'react';
-import PropTypes from 'prop-types'; 
-import AuctionItem from './auction/AuctionItem';
 import { NavLink } from 'react-router-dom' 
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser, faShoppingBasket } from '@fortawesome/free-solid-svg-icons'
 
 
 const menuItems = [
@@ -14,21 +15,10 @@ const menuItems = [
     {
         href: '/advices', title: 'Podpowiadamy'
     },
-    {
-        href: '/cart', title: 'Koszyk'
-    },
+    // {
+    //     href: '/cart', title: 'Koszyk'
+    // },
 ];
-
-AuctionItem.propTypes = {
-    title: PropTypes.string.isRequired,
-    imgURL: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-}
-
-AuctionItem.defaultProps = {
-    description: 'Brak opisu...'
-}
 
 class MenuBar extends Component {
 
@@ -59,6 +49,14 @@ class MenuBar extends Component {
                         ))
                         }
                     </ul>
+                </div>
+                <div style={{display:'block',float:'right'}}>
+                <NavLink className="btn btn-success" to='/log-in'>
+                    <FontAwesomeIcon icon={faUser} /> Logowanie
+                </NavLink>
+                <NavLink className="btn btn-info" to='/cart'>
+                    <FontAwesomeIcon icon={faShoppingBasket} /> Koszyk
+                </NavLink>
                 </div>
             </nav>
         );
